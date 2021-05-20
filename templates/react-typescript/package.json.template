@@ -18,7 +18,7 @@ module.exports = options => `{
   "description": "Bootstrapped Looker Extension with React and Typescript",
   "main": "dist/bundle.js",
   "author": "yournamehere",
-  "license": "Apache",
+  "license": "Apache-2.0",
   "scripts": {
     "analyze": "export ANALYZE_MODE=static && yarn build",
     "build": "export BABEL_ENV=build && webpack --config webpack.prod.js",
