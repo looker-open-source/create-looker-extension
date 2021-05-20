@@ -101,7 +101,7 @@ describe("generates full projects and runs dev server", function () {
       shell: true,
       timeout: 20000,
     });
-    expect(out.stdout.toString()).to.contain("Project is running");
+    expect(out.stdout.toString()).to.contain("Compiled successfully");
   });
 
   it("generates a vanilla/typescript project", async function () {
