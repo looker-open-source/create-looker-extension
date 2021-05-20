@@ -1,0 +1,88 @@
+// Copyright 2021 Google LLC
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+//     https://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+ module.exports = options => `{
+  "name": "${options.projectName}",
+  "version": "0.0.1",
+  "description": "Bootstrapped Looker Extension with React and Javascript",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "analyze": "export ANALYZE_MODE=static && yarn build",
+    "build": "export BABEL_ENV=build && webpack --config webpack.prod.js",
+    "clean": "rm -rf dist",
+    "develop": "webpack serve --hot --port 8080 --disable-host-check --config webpack.develop.js",
+    "prebuild": "yarn clean"
+  },
+  "author": "yournamehere",
+  "license": "Apache",
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@looker/components": "^1.1.6",
+    "@looker/embed-sdk": "^1.6.0",
+    "@looker/extension-sdk": "^21.4.5",
+    "@looker/extension-sdk-react": "^21.4.5",
+    "@looker/icons": "1.1.5",
+    "@looker/sdk": "^21.4.3",
+    "@looker/sdk-rtl": "^21.0.12",
+    "@styled-icons/material": "10.28.0",
+    "@styled-icons/material-outlined": "10.28.0",
+    "@styled-icons/material-rounded": "10.28.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-is": "^16.13.1",
+    "react-router-dom": "^5.1.2",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/plugin-transform-react-jsx": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-react": "^7.12.10",
+    "@babel/runtime": "^7.12.5",
+    "babel-loader": "^8.2.2",
+    "babel-preset-nano-react-app": "^0.1.0",
+    "dotenv": "^8.2.0",
+    "react-hot-loader": "^4.12.20",
+    "webpack": "^5.10.0",
+    "webpack-bundle-analyzer": "^4.2.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "babel": {
+    "presets": [
+      "nano-react-app"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ],
+      [
+        "@babel/plugin-transform-react-jsx",
+        {
+          "pragmaFrag": "React.Fragment"
+        }
+      ]
+    ]
+  }
+}
+`;

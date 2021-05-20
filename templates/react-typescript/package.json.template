@@ -1,0 +1,97 @@
+// Copyright 2021 Google LLC
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+//     https://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+module.exports = options => `{
+  "name": "${options.projectName}",
+  "version": "0.0.1",
+  "description": "Bootstrapped Looker Extension with React and Typescript",
+  "main": "dist/bundle.js",
+  "author": "yournamehere",
+  "license": "Apache",
+  "scripts": {
+    "analyze": "export ANALYZE_MODE=static && yarn build",
+    "build": "export BABEL_ENV=build && webpack --config webpack.prod.js",
+    "clean": "rm -rf dist",
+    "develop": "webpack serve --hot --port 8080 --disable-host-check --config webpack.develop.js",
+    "prebuild": "yarn clean"
+  },
+  "dependencies": {
+    "@looker/components": "^1.1.6",
+    "@looker/icons": "1.1.5",
+    "@looker/embed-sdk": "^1.6.0",
+    "@looker/extension-sdk": "^21.4.5",
+    "@looker/extension-sdk-react": "^21.4.5",
+    "@looker/sdk": "^21.4.3",
+    "@looker/sdk-rtl": "^21.0.12",
+    "@styled-icons/material": "10.28.0",
+    "@styled-icons/material-outlined": "10.28.0",
+    "@styled-icons/material-rounded": "10.28.0",
+    "date-fns": "^2.12.0",
+    "lodash": "^4.17.15",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-is": "^16.13.1",
+    "react-router-dom": "^5.1.2",
+    "semver": "^7.3.4",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.13.16",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
+    "@babel/plugin-transform-react-jsx": "^7.13.12",
+    "@babel/plugin-transform-runtime": "^7.13.15",
+    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-react": "^7.12.10",
+    "@babel/preset-typescript": "^7.12.7",
+    "@babel/runtime": "^7.12.5",
+    "@types/lodash": "^4.14.165",
+    "@types/node": "^14.14.12",
+    "@types/react": "^16.14.2",
+    "@types/react-dom": "^16.9.10",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/readable-stream": "^2.3.5",
+    "@types/semver": "^7.3.1",
+    "@types/styled-components": "5.1.5",
+    "babel-loader": "^8.2.2",
+    "babel-loader-exclude-node-modules-except": "^1.1.2",
+    "babel-preset-nano-react-app": "^0.1.0",
+    "minimist": "^1.2.2",
+    "nodemon": "^2.0.6",
+    "npm-run-all": "^4.1.5",
+    "react-hot-loader": "^4.12.20",
+    "typescript": "4.1.2",
+    "webpack": "^5.10.0",
+    "webpack-bundle-analyzer": "^4.2.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "babel": {
+    "presets": [
+      "nano-react-app"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties"
+      ],
+      [
+        "@babel/plugin-transform-react-jsx",
+        {
+          "pragmaFrag": "React.Fragment"
+        }
+      ]
+    ]
+  }
+}`

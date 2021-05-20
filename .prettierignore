@@ -1,0 +1,4 @@
+# Ignore artifacts:
+app
+node_modules
+templates
