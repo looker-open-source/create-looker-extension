@@ -50,6 +50,7 @@ module.exports = (api) => {
       '@babel/plugin-proposal-object-rest-spread',
       '@babel/plugin-transform-runtime',
       'babel-plugin-styled-components',
+      ["@babel/plugin-proposal-private-methods", { "loose": true }]
     ],
   }
 }
