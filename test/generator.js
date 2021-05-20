@@ -64,7 +64,7 @@ describe("generates full projects and runs dev server", function () {
     const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
       stdio: "pipe",
       shell: true,
-      timeout: 10000,
+      timeout: 20000,
     });
     expect(out.stdout.toString()).to.contain("Project is running");
   });
@@ -99,7 +99,7 @@ describe("generates full projects and runs dev server", function () {
     const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
       stdio: "pipe",
       shell: true,
-      timeout: 10000,
+      timeout: 20000,
     });
     expect(out.stdout.toString()).to.contain("Project is running");
   });
@@ -134,9 +134,9 @@ describe("generates full projects and runs dev server", function () {
     const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
       stdio: "pipe",
       shell: true,
-      timeout: 10000,
+      timeout: 20000,
     });
-    expect(out.stdout.toString()).to.contain("Project is running");
+    expect(out.stdout.toString()).to.contain("Compiled successfully");
   });
 
   it("generates a vanilla/javascript project", async function () {
@@ -169,9 +169,9 @@ describe("generates full projects and runs dev server", function () {
     const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
       stdio: "pipe",
       shell: true,
-      timeout: 10000,
+      timeout: 20000,
     });
-    expect(out.stdout.toString()).to.contain("Project is running");
+    expect(out.stdout.toString()).to.contain("Compiled successfully");
   });
 });
 
