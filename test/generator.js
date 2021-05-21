@@ -25,6 +25,7 @@ const { generatorPrompt } = require("../src/utils");
 const projectName = "app";
 
 beforeEach(async function () {
+  this.timeout(10000);
   try {
     spawnSync("rm", ["-rf", projectName], { stdio: "inherit" });
   } catch (err) {
@@ -64,7 +65,7 @@ describe("generates full projects and runs dev server", function () {
     const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
       stdio: "pipe",
       shell: true,
-      timeout: 20000,
+      timeout: 60000,
     });
     expect(out.stdout.toString()).to.contain("Project is running");
   });
@@ -99,7 +100,7 @@ describe("generates full projects and runs dev server", function () {
     const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
       stdio: "pipe",
       shell: true,
-      timeout: 20000,
+      timeout: 60000,
     });
     expect(out.stdout.toString()).to.contain("Compiled successfully");
   });
@@ -134,7 +135,7 @@ describe("generates full projects and runs dev server", function () {
     const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
       stdio: "pipe",
       shell: true,
-      timeout: 20000,
+      timeout: 60000,
     });
     expect(out.stdout.toString()).to.contain("Compiled successfully");
   });
@@ -169,7 +170,7 @@ describe("generates full projects and runs dev server", function () {
     const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
       stdio: "pipe",
       shell: true,
-      timeout: 20000,
+      timeout: 60000,
     });
     expect(out.stdout.toString()).to.contain("Compiled successfully");
   });
