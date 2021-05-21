@@ -25,7 +25,7 @@ yarn develop
 ```
 npx create-looker-extension <your-project-name>
 cd <your-project-name>
-npm develop
+npm run develop
 ```
 
 _Developing? To run this project locally, just run `./src/index.js <your-project-name>` from the root directory_
