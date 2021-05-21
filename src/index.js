@@ -27,6 +27,6 @@ const projectName = outputDirectory ? String(outputDirectory) : "app";
 extensionGenerator({
   prompt: generatorPrompt(projectName),
   finalizeTemplate: (template) => template,
-  templateDirectory: path.resolve(process.cwd(), "templates"),
+  templateDirectory: path.resolve(__dirname, "../templates"),
   outputDirectory: path.resolve(process.cwd(), projectName),
 });
