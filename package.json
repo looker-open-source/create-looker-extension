@@ -20,14 +20,15 @@
     "prettier": "prettier --write ."
   },
   "dependencies": {
+    "recursive-readdir": "2.2.2",
+    "chalk": "^4.1.0",
+    "enquirer": "2.3.1",
+    "minimist": "1.2.0",
   },
   "devDependencies": {
     "prettier": "2.2.1",
     "chai": "^4.3.4",
-    "chalk": "^4.1.0",
-    "enquirer": "2.3.1",
-    "minimist": "1.2.0",
     "mocha": "^8.3.2",
-    "recursive-readdir": "2.2.2"
+    
   }
 }
