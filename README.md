@@ -8,12 +8,24 @@ It is the easiest way to create a new extension and we recommend it for nearly a
 
 ## Example usage:
 
-You must have [Yarn](https://classic.yarnpkg.com/en/docs/install) installed to use this tool.
+You can run create-looker-extension with [yarn](https://classic.yarnpkg.com/en/docs/install) or [npx](https://www.npmjs.com/package/npx). 
+**We generally recommend using yarn** as it's what the Looker team uses / our tooling assumes you are using.
 
+Either way, you do not need to install any dependencies ahead of time (besides yarn / npm).
+
+The command is very slightly different (yarn uses `create looker-extension` vs npx's `create-looker-extension`).
+
+**yarn:**
 ```
 yarn create looker-extension <your-project-name>
 cd <your-project-name>
 yarn develop
+```
+**npm**
+```
+npx create-looker-extension <your-project-name>
+cd <your-project-name>
+npm develop
 ```
 
 _Developing? To run this project locally, just run `./src/index.js <your-project-name>` from the root directory_
