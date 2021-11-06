@@ -1,6 +1,6 @@
 {
   "name": "create-looker-extension",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Looker",
   "bin": "src/index.js",
   "description": "A utility to bootstrap looker extensions without manual configuration",
@@ -17,17 +17,18 @@
   ],
   "scripts": {
     "test": "mocha --exit",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "new": "./src/index.js"
   },
   "dependencies": {
     "recursive-readdir": "2.2.2",
-    "chalk": "^4.1.0",
-    "enquirer": "2.3.1",
-    "minimist": "1.2.0"
+    "chalk": "^4.1.2",
+    "enquirer": "2.3.6",
+    "minimist": "1.2.5"
   },
   "devDependencies": {
-    "prettier": "2.2.1",
+    "prettier": "2.4.1",
     "chai": "^4.3.4",
-    "mocha": "^8.3.2"
+    "mocha": "^9.1.3"
   }
 }

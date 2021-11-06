@@ -19,7 +19,7 @@ const { installDependencies, buildProject, cleanup } = require("./utils");
 
 const extensionGenerator = async ({
   templateDirectory,
-  outputDirectory,
+  _outputDirectory, // TODO remove?
   prompt = Promise.resolve({}),
   finalizeTemplate = (identity) => identity,
   dynamicExtension = ".template",
@@ -29,7 +29,7 @@ const extensionGenerator = async ({
     cleanup(answers["projectName"]);
   });
   process.on("exit", (code) => {
-    if (code != 0 && code != 9102) {
+    if (code !== 0 && code !== 9102) {
       // Clean up our mess, unless the mess is not caused by the generator.
       cleanup(answers["projectName"]);
     }
@@ -57,7 +57,7 @@ const extensionGenerator = async ({
         process.exit(9102);
       })
       .catch(() => false);
-    const finalFiles = await buildProject(
+    await buildProject(
       answers,
       templateDirectory,
       dynamicExtension,
@@ -65,8 +65,7 @@ const extensionGenerator = async ({
     );
 
     //We yarn install in the script to make the finished project ready to run
-    const install = await installDependencies(answers);
-    return install;
+    return await installDependencies(answers);
   } catch (e) {
     console.error(
       chalk.bold.yellow("Error receiving answers in generator: "),

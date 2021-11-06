@@ -18,7 +18,7 @@ const fs = require("fs").promises;
 const { prompt } = require("enquirer");
 const { readFileSync } = require("fs");
 const chalk = require("chalk");
-var { spawn, spawnSync } = require("child_process");
+const { spawnSync } = require("child_process");
 
 const cleanup = (dirname) => {
   console.log(
@@ -52,13 +52,13 @@ const generatorPrompt = (projectName) => {
       choices: ["React", "No framework"],
       result(value) {
         let parsed = value.toLowerCase();
-        if (parsed == "no framework") {
+        if (parsed === "no framework") {
           parsed = "vanilla";
         }
         return parsed;
       },
     },
-  ]).catch((e) => {
+  ]).catch((_e) => {
     console.error(
       chalk.bold.yellow(
         "Error receiving prompt answers. See other log lines for further details."
@@ -99,7 +99,7 @@ const buildProject = async function (
   });
 
   const finalFiles = finalizeTemplate(fileMap, answers);
-  const res = await Promise.all(
+  await Promise.all(
     Object.keys(finalFiles).map(async (adjustedRelativePath_1) => {
       const finalPath = path.join(
         answers["projectName"],
@@ -119,7 +119,7 @@ const buildProject = async function (
       }
     })
   );
-  return;
+
 };
 
 const installDependencies = async function (answers) {
@@ -132,7 +132,7 @@ const installDependencies = async function (answers) {
   console.log(chalk.blue.bold("Installing dependencies..."));
   try {
     const installation = await installProcess(answers["projectName"]);
-    if (installation.signal == "SIGINT") {
+    if (installation.signal === "SIGINT") {
       cleanup(answers["projectName"]);
       console.error(
         chalk.bold.yellow(
