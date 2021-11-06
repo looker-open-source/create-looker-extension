@@ -30,16 +30,16 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@looker/extension-sdk": "0.16.1",
-    "@looker/sdk": "7.20.0",
-    "@looker/sdk-rtl": "7.20.0"
+    "@looker/extension-sdk": "^21.18.1",
+    "@looker/sdk": "^21.18.1",
+    "@looker/sdk-rtl": "^21.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
-    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.13.16",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
+    "@babel/plugin-transform-runtime": "^7.13.15",
     "@babel/preset-env": "^7.12.10",
     "@babel/runtime": "^7.12.5",
     "babel-loader": "^8.2.2",
