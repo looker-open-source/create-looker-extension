@@ -39,7 +39,7 @@ const extensionGenerator = async ({
 
   console.log(
     chalk.blue.bold(
-      "🧪 Welcome to the Looker Extension Generator. Follow the prompts below to rapidly create an extension."
+      "🧪 Welcome to the Looker Extension Generator. Follow the prompts below to create an extension."
     )
   );
   const answers = await prompt;
