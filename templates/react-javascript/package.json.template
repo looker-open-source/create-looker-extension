@@ -40,6 +40,7 @@
     "@styled-icons/material": "10.34.0",
     "@styled-icons/material-outlined": "10.34.0",
     "@styled-icons/material-rounded": "10.34.0",
+    "lodash": "^4.17.21",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-is": "^16.13.1",
@@ -77,6 +78,7 @@
           "loose": true
         }
       ],
+      ["@babel/plugin-proposal-private-property-in-object", { "loose": true }],
       [
         "@babel/plugin-transform-react-jsx",
         {

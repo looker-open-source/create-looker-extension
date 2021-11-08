@@ -21,10 +21,10 @@
     "new": "./src/index.js"
   },
   "dependencies": {
-    "recursive-readdir": "2.2.2",
+    "recursive-readdir": "^2.2.2",
     "chalk": "^4.1.2",
-    "enquirer": "2.3.6",
-    "minimist": "1.2.5"
+    "enquirer": "^2.3.6",
+    "minimist": "^1.2.5"
   },
   "devDependencies": {
     "prettier": "2.4.1",
