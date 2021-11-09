@@ -64,7 +64,7 @@ ${options.projectName} is a Looker extension using React and TypeScript.
 
 6. Create a \`model\` LookML file in your project.
 
-   Typically, the model is named the the same as the extension project. The model is used to control access to the extension.
+   Typically, the model is named the same as the extension project. The model is used to control access to the extension.
 
    - [Configure the model you created](https://docs.looker.com/data-modeling/getting-started/create-projects#configuring_a_model) so that it has access to some connection (any connection).
 
