@@ -32,15 +32,16 @@ const runProject = (projectName, command = 'build') => {
   });
 }
 
+beforeEach(async function () {
+  try {
+    spawnSync("rm", ["-rf", projectName], {stdio: "inherit"});
+  } catch (err) {
+    //This might just error sometimes if there's no dir, that's OK.
+    console.log("error cleaning up", err);
+  }
+});
+
 describe("generates full projects", () => {
-  beforeEach(async function () {
-    try {
-      spawnSync("rm", ["-rf", projectName], {stdio: "inherit"});
-    } catch (err) {
-      //This might just error sometimes if there's no dir, that's OK.
-      console.log("error cleaning up", err);
-    }
-  });
 
   describe("and runs dev server", function () {
     it("generates a react/typescript project", async function () {

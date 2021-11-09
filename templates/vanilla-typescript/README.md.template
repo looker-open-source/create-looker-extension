@@ -40,7 +40,10 @@ ${options.projectName} is a Looker extension using TypeScript.
 
 4. Now log in to Looker and create a new project.
 
-    This is found under **Develop** => **Manage LookML Projects** => **New LookML Project**.
+    Depending on the version of Looker, a new project can be created under:
+
+    - **Develop** => **Manage LookML Projects** => **New LookML Project**, or
+    - **Develop** => **Projects** => **New LookML Project**
 
     Select "Blank Project" as the "Starting Point". This creates a new LookML project with no files.
 
@@ -49,9 +52,9 @@ ${options.projectName} is a Looker extension using TypeScript.
    Either drag and upload the \`manifest.lkml\` file in this directory into your Looker project, or create a \`manifest.lkml\` with the same content. Change the \`id\`, \`label\`, or \`url\` as needed.
 
    \`\`\`
-    project_name: "extension-counter"
-    application: extension-counter {
-        label: "Extension Counter"
+    project_name: "${options.projectName}"
+    application: ${options.projectName} {
+        label: "${options.projectName} TypeScript extension"
         url: "http://localhost:8080/bundle.js"
         entitlements: {
           core_api_methods: ["me"]
