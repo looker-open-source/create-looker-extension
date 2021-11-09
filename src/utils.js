@@ -58,10 +58,10 @@ const generatorPrompt = (projectName) => {
         return parsed;
       },
     },
-  ]).catch((_e) => {
+  ]).catch((e) => {
     console.error(
       chalk.bold.yellow(
-        "Error receiving prompt answers. See other log lines for further details."
+        `Error receiving answers: ${e}`
       )
     );
   });
