@@ -20,295 +20,282 @@ const path = require("path");
 const Enquirer = require("enquirer");
 
 const extensionGenerator = require("../src/generator");
-const { generatorPrompt } = require("../src/utils");
+const {generatorPrompt} = require("../src/utils");
 
 const projectName = "app";
 
-beforeEach(async function () {
-  try {
-    spawnSync("rm", ["-rf", projectName], { stdio: "inherit" });
-  } catch (err) {
-    //This might just error sometimes if there's no dir, that's OK.
-    console.log("error cleaning up", err);
-  }
-});
+const runProject = (projectName, command = 'build') => {
+  return spawnSync("cd", [projectName, "&&", "yarn", command], {
+    stdio: "pipe",
+    shell: true,
+    timeout: 20000,
+  });
+}
 
-describe("generates full projects and runs dev server", function () {
-  it("generates a react/typescript project", async function () {
-    this.timeout(120000);
-    const enquirer = new Enquirer(
-      {
-        show: false,
-        autofill: true,
-      },
-      {
-        framework: "react",
-        language: "typescript",
-        projectName: projectName,
-      }
-    );
-    enquirer.on("prompt", async (prompt) => {
-      try {
-        await prompt.submit();
-      } catch (err) {
-        error = err;
-      }
-    });
-    const prompt = generatorPrompt(projectName);
-    const result = await extensionGenerator({
-      prompt: enquirer.prompt(prompt),
-      finalizeTemplate: (template) => template,
-      templateDirectory: path.resolve(process.cwd(), "templates"),
-      outputDirectory: path.resolve(process.cwd(), projectName),
-    });
-    const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
-      stdio: "pipe",
-      shell: true,
-      timeout: 20000,
-    });
-    expect(out.stdout.toString()).to.contain("Project is running");
+describe("generates full projects", () => {
+  beforeEach(async function () {
+    try {
+      spawnSync("rm", ["-rf", projectName], {stdio: "inherit"});
+    } catch (err) {
+      //This might just error sometimes if there's no dir, that's OK.
+      console.log("error cleaning up", err);
+    }
   });
 
-  it("generates a react/javascript project", async function () {
-    this.timeout(120000);
-    const enquirer = new Enquirer(
-      {
-        show: false,
-        autofill: true,
-      },
-      {
-        framework: "react",
-        language: "javascript",
-        projectName: projectName,
-      }
-    );
-    enquirer.on("prompt", async (prompt) => {
-      try {
-        await prompt.submit();
-      } catch (err) {
-        error = err;
-      }
+  describe("and runs dev server", function () {
+    it("generates a react/typescript project", async function () {
+      this.timeout(120000);
+      const enquirer = new Enquirer(
+        {
+          show: false,
+          autofill: true,
+        },
+        {
+          framework: "react",
+          language: "typescript",
+          projectName: projectName,
+        }
+      );
+      enquirer.on("prompt", async (prompt) => {
+        try {
+          await prompt.submit();
+        } catch (err) {
+          error = err;
+        }
+      });
+      const prompt = generatorPrompt(projectName);
+      const result = await extensionGenerator({
+        prompt: enquirer.prompt(prompt),
+        finalizeTemplate: (template) => template,
+        templateDirectory: path.resolve(process.cwd(), "templates"),
+        outputDirectory: path.resolve(process.cwd(), projectName),
+      });
+      const out = runProject(projectName, "develop")
+      expect(out.stdout.toString()).to.contain("Project is running");
     });
-    const prompt = generatorPrompt(projectName);
-    const result = await extensionGenerator({
-      prompt: enquirer.prompt(prompt),
-      finalizeTemplate: (template) => template,
-      templateDirectory: path.resolve(process.cwd(), "templates"),
-      outputDirectory: path.resolve(process.cwd(), projectName),
+
+    it("generates a react/javascript project", async function () {
+      this.timeout(120000);
+      const enquirer = new Enquirer(
+        {
+          show: false,
+          autofill: true,
+        },
+        {
+          framework: "react",
+          language: "javascript",
+          projectName: projectName,
+        }
+      );
+      enquirer.on("prompt", async (prompt) => {
+        try {
+          await prompt.submit();
+        } catch (err) {
+          error = err;
+        }
+      });
+      const prompt = generatorPrompt(projectName);
+      const result = await extensionGenerator({
+        prompt: enquirer.prompt(prompt),
+        finalizeTemplate: (template) => template,
+        templateDirectory: path.resolve(process.cwd(), "templates"),
+        outputDirectory: path.resolve(process.cwd(), projectName),
+      });
+      const out = runProject(projectName, "develop")
+      expect(out.stdout.toString()).to.contain("Compiled successfully");
     });
-    const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
-      stdio: "pipe",
-      shell: true,
-      timeout: 20000,
+
+    it("generates a vanilla/typescript project", async function () {
+      this.timeout(120000);
+      const enquirer = new Enquirer(
+        {
+          show: false,
+          autofill: true,
+        },
+        {
+          framework: "vanilla",
+          language: "typescript",
+          projectName: projectName,
+        }
+      );
+      enquirer.on("prompt", async (prompt) => {
+        try {
+          await prompt.submit();
+        } catch (err) {
+          error = err;
+        }
+      });
+      const prompt = generatorPrompt(projectName);
+      const result = await extensionGenerator({
+        prompt: enquirer.prompt(prompt),
+        finalizeTemplate: (template) => template,
+        templateDirectory: path.resolve(process.cwd(), "templates"),
+        outputDirectory: path.resolve(process.cwd(), projectName),
+      });
+      const out = runProject(projectName, "develop")
+      expect(out.stdout.toString()).to.contain("Compiled successfully");
     });
-    expect(out.stdout.toString()).to.contain("Compiled successfully");
+
+    it("generates a vanilla/javascript project", async function () {
+      this.timeout(120000);
+      const enquirer = new Enquirer(
+        {
+          show: false,
+          autofill: true,
+        },
+        {
+          framework: "vanilla",
+          language: "javascript",
+          projectName: projectName,
+        }
+      );
+      enquirer.on("prompt", async (prompt) => {
+        try {
+          await prompt.submit();
+        } catch (err) {
+          error = err;
+        }
+      });
+      const prompt = generatorPrompt(projectName);
+      const result = await extensionGenerator({
+        prompt: enquirer.prompt(prompt),
+        finalizeTemplate: (template) => template,
+        templateDirectory: path.resolve(process.cwd(), "templates"),
+        outputDirectory: path.resolve(process.cwd(), projectName),
+      });
+      const out = runProject(projectName, "develop")
+      expect(out.stdout.toString()).to.contain("Compiled successfully");
+    });
   });
 
-  it("generates a vanilla/typescript project", async function () {
-    this.timeout(120000);
-    const enquirer = new Enquirer(
-      {
-        show: false,
-        autofill: true,
-      },
-      {
-        framework: "vanilla",
-        language: "typescript",
-        projectName: projectName,
-      }
-    );
-    enquirer.on("prompt", async (prompt) => {
-      try {
-        await prompt.submit();
-      } catch (err) {
-        error = err;
-      }
+  describe("and builds successfully", function () {
+    it("generates a react/typescript project", async function () {
+      this.timeout(120000);
+      const enquirer = new Enquirer(
+        {
+          show: false,
+          autofill: true,
+        },
+        {
+          framework: "react",
+          language: "typescript",
+          projectName: projectName,
+        }
+      );
+      enquirer.on("prompt", async (prompt) => {
+        try {
+          await prompt.submit();
+        } catch (err) {
+          error = err;
+        }
+      });
+      const prompt = generatorPrompt(projectName);
+      const result = await extensionGenerator({
+        prompt: enquirer.prompt(prompt),
+        finalizeTemplate: (template) => template,
+        templateDirectory: path.resolve(process.cwd(), "templates"),
+        outputDirectory: path.resolve(process.cwd(), projectName),
+      });
+      const out = runProject(projectName, "build")
+      expect(out.stdout.toString()).to.contain("compiled with");
     });
-    const prompt = generatorPrompt(projectName);
-    const result = await extensionGenerator({
-      prompt: enquirer.prompt(prompt),
-      finalizeTemplate: (template) => template,
-      templateDirectory: path.resolve(process.cwd(), "templates"),
-      outputDirectory: path.resolve(process.cwd(), projectName),
+
+    it("generates a react/javascript project", async function () {
+      this.timeout(120000);
+      const enquirer = new Enquirer(
+        {
+          show: false,
+          autofill: true,
+        },
+        {
+          framework: "react",
+          language: "javascript",
+          projectName: projectName,
+        }
+      );
+      enquirer.on("prompt", async (prompt) => {
+        try {
+          await prompt.submit();
+        } catch (err) {
+          error = err;
+        }
+      });
+      const prompt = generatorPrompt(projectName);
+      const result = await extensionGenerator({
+        prompt: enquirer.prompt(prompt),
+        finalizeTemplate: (template) => template,
+        templateDirectory: path.resolve(process.cwd(), "templates"),
+        outputDirectory: path.resolve(process.cwd(), projectName),
+      });
+      const out = runProject(projectName, "build")
+      expect(out.stdout.toString()).to.contain("compiled with");
     });
-    const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
-      stdio: "pipe",
-      shell: true,
-      timeout: 20000,
+
+    it("generates a vanilla/typescript project", async function () {
+      this.timeout(120000);
+      const enquirer = new Enquirer(
+        {
+          show: false,
+          autofill: true,
+        },
+        {
+          framework: "vanilla",
+          language: "typescript",
+          projectName: projectName,
+        }
+      );
+      enquirer.on("prompt", async (prompt) => {
+        try {
+          await prompt.submit();
+        } catch (err) {
+          error = err;
+        }
+      });
+      const prompt = generatorPrompt(projectName);
+      const result = await extensionGenerator({
+        prompt: enquirer.prompt(prompt),
+        finalizeTemplate: (template) => template,
+        templateDirectory: path.resolve(process.cwd(), "templates"),
+        outputDirectory: path.resolve(process.cwd(), projectName),
+      });
+      const out = runProject(projectName, "build")
+      // cater to puzzling escape character sequences
+      const output = out.stdout.toString()
+      expect(output).to.contain("compiled [1m[32msuccessfully");
     });
-    expect(out.stdout.toString()).to.contain("Compiled successfully");
+
+    it("generates a vanilla/javascript project", async function () {
+      this.timeout(120000);
+      const enquirer = new Enquirer(
+        {
+          show: false,
+          autofill: true,
+        },
+        {
+          framework: "vanilla",
+          language: "javascript",
+          projectName: projectName,
+        }
+      );
+      enquirer.on("prompt", async (prompt) => {
+        try {
+          await prompt.submit();
+        } catch (err) {
+          error = err;
+        }
+      });
+      const prompt = generatorPrompt(projectName);
+      const result = await extensionGenerator({
+        prompt: enquirer.prompt(prompt),
+        finalizeTemplate: (template) => template,
+        templateDirectory: path.resolve(process.cwd(), "templates"),
+        outputDirectory: path.resolve(process.cwd(), projectName),
+      });
+      const out = runProject(projectName, "build")
+      // cater to puzzling escape character sequences
+      const output = out.stdout.toString()
+      expect(output).to.contain("compiled [1m[32msuccessfully");
+    });
   });
 
-  it("generates a vanilla/javascript project", async function () {
-    this.timeout(120000);
-    const enquirer = new Enquirer(
-      {
-        show: false,
-        autofill: true,
-      },
-      {
-        framework: "vanilla",
-        language: "javascript",
-        projectName: projectName,
-      }
-    );
-    enquirer.on("prompt", async (prompt) => {
-      try {
-        await prompt.submit();
-      } catch (err) {
-        error = err;
-      }
-    });
-    const prompt = generatorPrompt(projectName);
-    const result = await extensionGenerator({
-      prompt: enquirer.prompt(prompt),
-      finalizeTemplate: (template) => template,
-      templateDirectory: path.resolve(process.cwd(), "templates"),
-      outputDirectory: path.resolve(process.cwd(), projectName),
-    });
-    const out = spawnSync("cd", [projectName, "&&", "yarn", "develop"], {
-      stdio: "pipe",
-      shell: true,
-      timeout: 20000,
-    });
-    expect(out.stdout.toString()).to.contain("Compiled successfully");
-  });
-});
-
-describe("generates full projects and builds successfully", function () {
-  it("generates a react/typescript project", async function () {
-    this.timeout(120000);
-    const enquirer = new Enquirer(
-      {
-        show: false,
-        autofill: true,
-      },
-      {
-        framework: "react",
-        language: "typescript",
-        projectName: projectName,
-      }
-    );
-    enquirer.on("prompt", async (prompt) => {
-      try {
-        await prompt.submit();
-      } catch (err) {
-        error = err;
-      }
-    });
-    const prompt = generatorPrompt(projectName);
-    const result = await extensionGenerator({
-      prompt: enquirer.prompt(prompt),
-      finalizeTemplate: (template) => template,
-      templateDirectory: path.resolve(process.cwd(), "templates"),
-      outputDirectory: path.resolve(process.cwd(), projectName),
-    });
-    const out = spawnSync("cd", [projectName, "&&", "yarn", "build"], {
-      stdio: "pipe",
-      shell: true,
-    });
-    expect(out.stdout.toString()).to.contain("compiled with");
-  });
-
-  it("generates a react/javascript project", async function () {
-    this.timeout(120000);
-    const enquirer = new Enquirer(
-      {
-        show: false,
-        autofill: true,
-      },
-      {
-        framework: "react",
-        language: "javascript",
-        projectName: projectName,
-      }
-    );
-    enquirer.on("prompt", async (prompt) => {
-      try {
-        await prompt.submit();
-      } catch (err) {
-        error = err;
-      }
-    });
-    const prompt = generatorPrompt(projectName);
-    const result = await extensionGenerator({
-      prompt: enquirer.prompt(prompt),
-      finalizeTemplate: (template) => template,
-      templateDirectory: path.resolve(process.cwd(), "templates"),
-      outputDirectory: path.resolve(process.cwd(), projectName),
-    });
-    const out = spawnSync("cd", [projectName, "&&", "yarn", "build"], {
-      stdio: "pipe",
-      shell: true,
-    });
-    expect(out.stdout.toString()).to.contain("compiled with");
-  });
-
-  it("generates a vanilla/typescript project", async function () {
-    this.timeout(120000);
-    const enquirer = new Enquirer(
-      {
-        show: false,
-        autofill: true,
-      },
-      {
-        framework: "vanilla",
-        language: "typescript",
-        projectName: projectName,
-      }
-    );
-    enquirer.on("prompt", async (prompt) => {
-      try {
-        await prompt.submit();
-      } catch (err) {
-        error = err;
-      }
-    });
-    const prompt = generatorPrompt(projectName);
-    const result = await extensionGenerator({
-      prompt: enquirer.prompt(prompt),
-      finalizeTemplate: (template) => template,
-      templateDirectory: path.resolve(process.cwd(), "templates"),
-      outputDirectory: path.resolve(process.cwd(), projectName),
-    });
-    const out = spawnSync("cd", [projectName, "&&", "yarn", "build"], {
-      stdio: "pipe",
-      shell: true,
-    });
-    expect(out.stdout.toString()).to.contain("compiled successfully");
-  });
-
-  it("generates a vanilla/javascript project", async function () {
-    this.timeout(120000);
-    const enquirer = new Enquirer(
-      {
-        show: false,
-        autofill: true,
-      },
-      {
-        framework: "vanilla",
-        language: "javascript",
-        projectName: projectName,
-      }
-    );
-    enquirer.on("prompt", async (prompt) => {
-      try {
-        await prompt.submit();
-      } catch (err) {
-        error = err;
-      }
-    });
-    const prompt = generatorPrompt(projectName);
-    const result = await extensionGenerator({
-      prompt: enquirer.prompt(prompt),
-      finalizeTemplate: (template) => template,
-      templateDirectory: path.resolve(process.cwd(), "templates"),
-      outputDirectory: path.resolve(process.cwd(), projectName),
-    });
-    const out = spawnSync("cd", [projectName, "&&", "yarn", "build"], {
-      stdio: "pipe",
-      shell: true,
-    });
-    expect(out.stdout.toString()).to.contain("compiled successfully");
-  });
 });

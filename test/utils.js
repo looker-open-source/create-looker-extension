@@ -17,13 +17,13 @@ var expect = require("chai").expect;
 const fs = require("fs").promises;
 const path = require("path");
 const Enquirer = require("enquirer");
-const { cleanup, generatorPrompt } = require("../src/utils");
+const {cleanup, generatorPrompt} = require("../src/utils");
 
 const projectName = "app";
 
 beforeEach(async function () {
   try {
-    spawn("rm", ["-rf", projectName], { stdio: "inherit" });
+    spawn("rm", ["-rf", projectName], {stdio: "inherit"});
   } catch (err) {
     //This might just error sometimes if there's no dir, that's OK.
     console.log("error cleaning up", err);
@@ -49,104 +49,106 @@ describe("utils", function () {
       expect(await doesExist()).to.be.undefined;
     });
   });
-});
 
-describe("generator parsing", function () {
-  describe("generator prompt", function () {
-    it("parses answers properly with no framework / javascript", async function () {
-      const enquirer = new Enquirer(
-        {
-          show: false,
-          autofill: true,
-        },
-        {
+  describe("generator parsing", function () {
+    describe("generator prompt", function () {
+      it("parses answers properly with no framework / javascript", async function () {
+        const enquirer = new Enquirer(
+          {
+            show: false,
+            autofill: true,
+          },
+          {
+            framework: "No Framework",
+            language: "javascript",
+            projectName: projectName,
+          }
+        );
+        const expectedAnswers = {
           framework: "No Framework",
           language: "javascript",
-          projectName: projectName,
-        }
-      );
-      const expectedAnswers = {
-        framework: "No Framework",
-        language: "javascript",
-        projectName: "app",
-      };
-      const prompt = generatorPrompt(projectName);
-      return enquirer.prompt(prompt).then((answers) => {
-        console.log(answers);
-        expect(answers).to.deep.equal(expectedAnswers);
+          projectName: "app",
+        };
+        const prompt = generatorPrompt(projectName);
+        return enquirer.prompt(prompt).then((answers) => {
+          console.log(answers);
+          expect(answers).to.deep.equal(expectedAnswers);
+        });
       });
-    });
 
-    it("parses answers properly with no framework / typescript", async function () {
-      const enquirer = new Enquirer(
-        {
-          show: false,
-          autofill: true,
-        },
-        {
+      it("parses answers properly with no framework / typescript", async function () {
+        const enquirer = new Enquirer(
+          {
+            show: false,
+            autofill: true,
+          },
+          {
+            framework: "No Framework",
+            language: "typescript",
+            projectName: projectName,
+          }
+        );
+        const expectedAnswers = {
           framework: "No Framework",
           language: "typescript",
-          projectName: projectName,
-        }
-      );
-      const expectedAnswers = {
-        framework: "No Framework",
-        language: "typescript",
-        projectName: "app",
-      };
-      const prompt = generatorPrompt(projectName);
-      return enquirer.prompt(prompt).then((answers) => {
-        console.log(answers);
-        expect(answers).to.deep.equal(expectedAnswers);
+          projectName: "app",
+        };
+        const prompt = generatorPrompt(projectName);
+        return enquirer.prompt(prompt).then((answers) => {
+          console.log(answers);
+          expect(answers).to.deep.equal(expectedAnswers);
+        });
       });
-    });
 
-    it("parses answers properly with react / javascript", async function () {
-      const enquirer = new Enquirer(
-        {
-          show: false,
-          autofill: true,
-        },
-        {
+      it("parses answers properly with react / javascript", async function () {
+        const enquirer = new Enquirer(
+          {
+            show: false,
+            autofill: true,
+          },
+          {
+            framework: "react",
+            language: "javascript",
+            projectName: projectName,
+          }
+        );
+        const expectedAnswers = {
           framework: "react",
           language: "javascript",
-          projectName: projectName,
-        }
-      );
-      const expectedAnswers = {
-        framework: "react",
-        language: "javascript",
-        projectName: "app",
-      };
-      const prompt = generatorPrompt(projectName);
-      return enquirer.prompt(prompt).then((answers) => {
-        console.log(answers);
-        expect(answers).to.deep.equal(expectedAnswers);
+          projectName: "app",
+        };
+        const prompt = generatorPrompt(projectName);
+        return enquirer.prompt(prompt).then((answers) => {
+          console.log(answers);
+          expect(answers).to.deep.equal(expectedAnswers);
+        });
       });
-    });
 
-    it("parses answers properly with react / typescript", async function () {
-      const enquirer = new Enquirer(
-        {
-          show: false,
-          autofill: true,
-        },
-        {
+      it("parses answers properly with react / typescript", async function () {
+        const enquirer = new Enquirer(
+          {
+            show: false,
+            autofill: true,
+          },
+          {
+            framework: "react",
+            language: "typescript",
+            projectName: projectName,
+          }
+        );
+        const expectedAnswers = {
           framework: "react",
           language: "typescript",
-          projectName: projectName,
-        }
-      );
-      const expectedAnswers = {
-        framework: "react",
-        language: "typescript",
-        projectName: "app",
-      };
-      const prompt = generatorPrompt(projectName);
-      return enquirer.prompt(prompt).then((answers) => {
-        console.log(answers);
-        expect(answers).to.deep.equal(expectedAnswers);
+          projectName: "app",
+        };
+        const prompt = generatorPrompt(projectName);
+        return enquirer.prompt(prompt).then((answers) => {
+          console.log(answers);
+          expect(answers).to.deep.equal(expectedAnswers);
+        });
       });
     });
   });
+
 });
+
