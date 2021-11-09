@@ -103,7 +103,7 @@ describe("generates full projects", () => {
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
       const out = runProject(projectName, "develop")
-      expect(out.stdout.toString()).to.contain("Compiled successfully");
+      expect(out.stdout.toString()).to.match(/compiled.*successfully/i)
     });
 
     it("generates a vanilla/typescript project", async function () {
@@ -165,7 +165,7 @@ describe("generates full projects", () => {
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
       const out = runProject(projectName, "develop")
-      expect(out.stdout.toString()).to.contain("Compiled successfully");
+      expect(out.stdout.toString()).to.match(/compiled.*successfully/i)
     });
   });
 
@@ -260,9 +260,8 @@ describe("generates full projects", () => {
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
       const out = runProject(projectName, "build")
-      // cater to puzzling escape character sequences
       const output = out.stdout.toString()
-      expect(output).to.contain("compiled [1m[32msuccessfully");
+      expect(output).to.match(/compiled.*successfully/i)
     });
 
     it("generates a vanilla/javascript project", async function () {
@@ -293,9 +292,8 @@ describe("generates full projects", () => {
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
       const out = runProject(projectName, "build")
-      // cater to puzzling escape character sequences
       const output = out.stdout.toString()
-      expect(output).to.contain("compiled [1m[32msuccessfully");
+      expect(output).to.match(/compiled.*successfully/i)
     });
   });
 
