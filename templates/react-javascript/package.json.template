@@ -30,40 +30,42 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@looker/components": "^1.1.6",
-    "@looker/embed-sdk": "^1.6.0",
-    "@looker/extension-sdk": "^21.4.5",
-    "@looker/extension-sdk-react": "^21.4.5",
-    "@looker/icons": "1.1.5",
-    "@looker/sdk": "^21.4.3",
-    "@looker/sdk-rtl": "^21.0.12",
-    "@styled-icons/material": "10.28.0",
-    "@styled-icons/material-outlined": "10.28.0",
-    "@styled-icons/material-rounded": "10.28.0",
+    "@looker/components": "^2.8.9",
+    "@looker/icons": "^1.5.9",
+    "@looker/embed-sdk": "^1.6.1",
+    "@looker/extension-sdk": "^21.18.1",
+    "@looker/extension-sdk-react": "^21.18.1",
+    "@looker/sdk": "^21.18.1",
+    "@looker/sdk-rtl": "^21.1.1",
+    "@styled-icons/material": "10.34.0",
+    "@styled-icons/material-outlined": "10.34.0",
+    "@styled-icons/material-rounded": "10.34.0",
+    "lodash": "^4.17.21",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-is": "^16.13.1",
-    "react-router-dom": "^5.1.2",
-    "styled-components": "^5.2.1"
+    "react-router-dom": "^5.3.0",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
-    "@babel/plugin-transform-react-jsx": "^7.12.10",
-    "@babel/plugin-transform-runtime": "^7.12.10",
-    "@babel/preset-env": "^7.12.10",
-    "@babel/preset-react": "^7.12.10",
-    "@babel/runtime": "^7.12.5",
-    "babel-loader": "^8.2.2",
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.16.0",
+    "@babel/plugin-transform-react-jsx": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@babel/runtime": "^7.16.0",
+    "babel-loader": "^8.2.3",
     "babel-preset-nano-react-app": "^0.1.0",
     "dotenv": "^8.2.0",
     "react-hot-loader": "^4.12.20",
     "webpack": "^5.10.0",
-    "webpack-bundle-analyzer": "^4.2.0",
-    "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^3.11.2"
   },
   "babel": {
     "presets": [
@@ -76,6 +78,7 @@
           "loose": true
         }
       ],
+      ["@babel/plugin-proposal-private-property-in-object", { "loose": true }],
       [
         "@babel/plugin-transform-react-jsx",
         {

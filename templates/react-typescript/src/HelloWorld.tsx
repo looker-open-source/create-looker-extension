@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import React, { useContext, useEffect, useState } from 'react'
-import { ComponentsProvider, Space, Text } from '@looker/components'
+import { ComponentsProvider, Space, Span } from '@looker/components'
 import { ExtensionContext } from '@looker/extension-sdk-react'
 
 /**
@@ -38,10 +38,10 @@ export const HelloWorld: React.FC = () => {
 
   return (
     <ComponentsProvider>
-      <Space p="xxxxxlarge" width="100%" height="50vh" around>
-        <Text p="xxxxxlarge" fontSize="xxxxxlarge">
+      <Space around>
+        <Span fontSize="xxxxxlarge">
           {message}
-        </Text>
+        </Span>
       </Space>
     </ComponentsProvider>
   )
