@@ -198,7 +198,7 @@ describe("generates full projects", () => {
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
       const out = runProject(projectName, "build")
-      expect(out.stdout.toString()).to.contain("compiled with");
+      expect(out.error).to.equal(undefined)
     });
 
     it("generates a react/javascript project", async function () {
@@ -229,7 +229,7 @@ describe("generates full projects", () => {
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
       const out = runProject(projectName, "build")
-      expect(out.stdout.toString()).to.contain("compiled with");
+      expect(out.error).to.equal(undefined)
     });
 
     it("generates a vanilla/typescript project", async function () {
@@ -260,8 +260,7 @@ describe("generates full projects", () => {
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
       const out = runProject(projectName, "build")
-      const output = out.stdout.toString()
-      expect(output).to.match(/compiled.*successfully/i)
+      expect(out.error).to.equal(undefined)
     });
 
     it("generates a vanilla/javascript project", async function () {
@@ -292,8 +291,7 @@ describe("generates full projects", () => {
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
       const out = runProject(projectName, "build")
-      const output = out.stdout.toString()
-      expect(output).to.match(/compiled.*successfully/i)
+      expect(out.error).to.equal(undefined)
     });
   });
 
