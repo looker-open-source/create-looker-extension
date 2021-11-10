@@ -134,7 +134,7 @@ describe("generates full projects", () => {
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
       const out = runProject(projectName, "develop")
-      expect(out.stdout.toString()).to.contain("Compiled successfully");
+      expect(out.stdout.toString()).to.match(/compiled.*successfully/i)
     });
 
     it("generates a vanilla/javascript project", async function () {
