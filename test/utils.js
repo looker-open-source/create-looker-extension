@@ -17,13 +17,13 @@ const expect = require("chai").expect;
 const fs = require("fs").promises;
 const path = require("path");
 const Enquirer = require("enquirer");
-const {cleanup, generatorPrompt} = require("../src/utils");
+const { cleanup, generatorPrompt } = require("../src/utils");
 
 const projectName = "app";
 
 beforeEach(async function () {
   try {
-    spawn("rm", ["-rf", projectName], {stdio: "inherit"});
+    spawn("rm", ["-rf", projectName], { stdio: "inherit" });
   } catch (err) {
     //This might just error sometimes if there's no dir, that's OK.
     console.log("error cleaning up", err);
@@ -148,6 +148,4 @@ describe("utils", function () {
       });
     });
   });
-
 });
-

@@ -21,22 +21,22 @@
     "analyze": "export ANALYZE_MODE=static && yarn build",
     "build": "export BABEL_ENV=build && webpack --config webpack.prod.js",
     "clean": "rm -rf dist",
-    "develop": "webpack serve --hot --port 8080 --disable-host-check --config webpack.develop.js",
+    "develop": "webpack serve --hot --port 8080 --https --disable-host-check --config webpack.develop.js",
     "prebuild": "yarn clean"
   },
   "author": "yournamehere",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "dependencies": {
-    "@looker/components": "^2.8.9",
-    "@looker/icons": "^1.5.9",
-    "@looker/embed-sdk": "^1.6.1",
-    "@looker/extension-sdk": "^21.18.1",
-    "@looker/extension-sdk-react": "^21.18.1",
-    "@looker/sdk": "^21.18.1",
-    "@looker/sdk-rtl": "^21.1.1",
+    "@looker/components": "^4.0.4",
+    "@looker/icons": "^1.5.21",
+    "@looker/embed-sdk": "^1.8.0",
+    "@looker/extension-sdk": "^22.20.0",
+    "@looker/extension-sdk-react": "^22.20.0",
+    "@looker/sdk": "^22.20.0",
+    "@looker/sdk-rtl": "^21.4.0",
     "@styled-icons/material": "10.34.0",
     "@styled-icons/material-outlined": "10.34.0",
     "@styled-icons/material-rounded": "10.34.0",
