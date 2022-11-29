@@ -1,6 +1,6 @@
 {
   "name": "create-looker-extension",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Looker",
   "bin": "src/index.js",
   "description": "A utility to bootstrap looker extensions without manual configuration",
