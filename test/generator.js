@@ -20,32 +20,31 @@ const path = require("path");
 const Enquirer = require("enquirer");
 
 const extensionGenerator = require("../src/generator");
-const {generatorPrompt} = require("../src/utils");
+const { generatorPrompt } = require("../src/utils");
 
 const projectName = "app";
 
-const runProject = (projectName, command = 'build') => {
+const runProject = (projectName, command = "build") => {
   return spawnSync("cd", [projectName, "&&", "yarn", command], {
     stdio: "pipe",
     shell: true,
     timeout: 20000,
   });
-}
+};
 
-beforeEach(async function () {
-  try {
-    spawnSync("rm", ["-rf", projectName], {stdio: "inherit"});
-  } catch (err) {
-    //This might just error sometimes if there's no dir, that's OK.
-    console.log("error cleaning up", err);
-  }
-});
-
-describe("generates full projects", () => {
-
+describe("generates full projects", function() {
+  this.timeout(300000);
+  beforeEach(async function () {
+    try {
+      await fs.rm("./" + projectName, { recursive: true, force: true });
+    } catch (err) {
+      //This might just error sometimes if there's no dir, that's OK.
+      console.log("error cleaning up", err);
+    }
+  });
+  
   describe("and runs dev server", function () {
     it("generates a react/typescript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -71,12 +70,11 @@ describe("generates full projects", () => {
         templateDirectory: path.resolve(process.cwd(), "templates"),
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
-      const out = runProject(projectName, "develop")
-      expect(out.stdout.toString()).to.contain("Project is running");
+      const out = runProject(projectName, "develop");
+      expect(out.stdout.toString()).to.match(/Compiled.*successfully/i)
     });
 
     it("generates a react/javascript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -103,11 +101,10 @@ describe("generates full projects", () => {
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
       const out = runProject(projectName, "develop")
-      expect(out.stdout.toString()).to.match(/compiled.*successfully/i)
+      expect(out.stdout.toString()).to.match(/Compiled.*successfully/i)
     });
 
     it("generates a vanilla/typescript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -133,12 +130,11 @@ describe("generates full projects", () => {
         templateDirectory: path.resolve(process.cwd(), "templates"),
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
-      const out = runProject(projectName, "develop")
-      expect(out.stdout.toString()).to.match(/compiled.*successfully/i)
+      const out = runProject(projectName, "develop");
+      expect(out.stdout.toString()).to.match(/compiled.*successfully/i);
     });
 
     it("generates a vanilla/javascript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -164,14 +160,13 @@ describe("generates full projects", () => {
         templateDirectory: path.resolve(process.cwd(), "templates"),
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
-      const out = runProject(projectName, "develop")
-      expect(out.stdout.toString()).to.match(/compiled.*successfully/i)
+      const out = runProject(projectName, "develop");
+      expect(out.stdout.toString()).to.match(/compiled.*successfully/i);
     });
   });
 
   describe("and builds successfully", function () {
     it("generates a react/typescript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -197,12 +192,11 @@ describe("generates full projects", () => {
         templateDirectory: path.resolve(process.cwd(), "templates"),
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
-      const out = runProject(projectName, "build")
-      expect(out.error).to.equal(undefined)
+      const out = runProject(projectName, "build");
+      expect(out.error).to.equal(undefined);
     });
 
     it("generates a react/javascript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -228,12 +222,11 @@ describe("generates full projects", () => {
         templateDirectory: path.resolve(process.cwd(), "templates"),
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
-      const out = runProject(projectName, "build")
-      expect(out.error).to.equal(undefined)
+      const out = runProject(projectName, "build");
+      expect(out.error).to.equal(undefined);
     });
 
     it("generates a vanilla/typescript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -259,12 +252,11 @@ describe("generates full projects", () => {
         templateDirectory: path.resolve(process.cwd(), "templates"),
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
-      const out = runProject(projectName, "build")
-      expect(out.error).to.equal(undefined)
+      const out = runProject(projectName, "build");
+      expect(out.error).to.equal(undefined);
     });
 
     it("generates a vanilla/javascript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -290,9 +282,8 @@ describe("generates full projects", () => {
         templateDirectory: path.resolve(process.cwd(), "templates"),
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
-      const out = runProject(projectName, "build")
-      expect(out.error).to.equal(undefined)
+      const out = runProject(projectName, "build");
+      expect(out.error).to.equal(undefined);
     });
   });
-
 });

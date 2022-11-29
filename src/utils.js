@@ -59,11 +59,7 @@ const generatorPrompt = (projectName) => {
       },
     },
   ]).catch((e) => {
-    console.error(
-      chalk.bold.yellow(
-        `Error receiving answers: ${e}`
-      )
-    );
+    console.error(chalk.bold.yellow(`Error receiving answers: ${e}`));
   });
 };
 
@@ -119,7 +115,6 @@ const buildProject = async function (
       }
     })
   );
-
 };
 
 const installDependencies = async function (answers) {
