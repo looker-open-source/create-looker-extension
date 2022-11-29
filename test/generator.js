@@ -32,19 +32,19 @@ const runProject = (projectName, command = "build") => {
   });
 };
 
-beforeEach(async function () {
-  try {
-    spawnSync("rm", ["-rf", projectName], { stdio: "inherit" });
-  } catch (err) {
-    //This might just error sometimes if there's no dir, that's OK.
-    console.log("error cleaning up", err);
-  }
-});
-
-describe("generates full projects", () => {
+describe("generates full projects", function() {
+  this.timeout(300000);
+  beforeEach(async function () {
+    try {
+      await fs.rm("./" + projectName, { recursive: true, force: true });
+    } catch (err) {
+      //This might just error sometimes if there's no dir, that's OK.
+      console.log("error cleaning up", err);
+    }
+  });
+  
   describe("and runs dev server", function () {
     it("generates a react/typescript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -71,11 +71,10 @@ describe("generates full projects", () => {
         outputDirectory: path.resolve(process.cwd(), projectName),
       });
       const out = runProject(projectName, "develop");
-      expect(out.stdout.toString()).to.contain("Project is running");
+      expect(out.stdout.toString()).to.match(/Compiled.*successfully/i)
     });
 
     it("generates a react/javascript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -106,7 +105,6 @@ describe("generates full projects", () => {
     });
 
     it("generates a vanilla/typescript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -137,7 +135,6 @@ describe("generates full projects", () => {
     });
 
     it("generates a vanilla/javascript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -170,7 +167,6 @@ describe("generates full projects", () => {
 
   describe("and builds successfully", function () {
     it("generates a react/typescript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -201,7 +197,6 @@ describe("generates full projects", () => {
     });
 
     it("generates a react/javascript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -232,7 +227,6 @@ describe("generates full projects", () => {
     });
 
     it("generates a vanilla/typescript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
@@ -263,7 +257,6 @@ describe("generates full projects", () => {
     });
 
     it("generates a vanilla/javascript project", async function () {
-      this.timeout(120000);
       const enquirer = new Enquirer(
         {
           show: false,
